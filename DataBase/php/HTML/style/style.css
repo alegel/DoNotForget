@@ -1,0 +1,128 @@
+* {
+	margin: 0;
+	padding: 0;
+	font-family: arial;
+	font-size: 14px;
+}
+#wrap {
+	margin: 0 auto;
+	width: 1000px;
+}
+
+#wrap1 {
+	text-align:center;
+}
+
+footer {
+	display: block;
+	background: #FFC373;
+	margin-top: 10px;
+	padding: 20px;
+	
+	/* background: lightblue; */
+	background: -webkit-linear-gradient(#90E4E8, #81DAF5, #A9F5D0);
+	/* background: -moz-linear-gradient(#58ACFA, #81DAF5, #A9F5D0); */
+}
+
+header, nav, section/* , footer */ {
+	display: block;
+	background: #FFC373;
+	margin-top: 10px;
+	padding: 20px;
+	
+	background: lightblue;
+	background: -webkit-linear-gradient(#58ACFA, #81DAF5, #A9F5D0);
+	background: -moz-linear-gradient(#58ACFA, #81DAF5, #A9F5D0);
+}
+.logo {
+	width: 10%
+}
+
+#dlogog{
+border:1px solid red;
+height:90px;
+border-radius:100px;
+text-align:center;
+font-size: 72px;
+}
+
+.pic{
+width:150px;
+height:250px;
+border: 1px solid brown;
+border-radius:15px;
+-webkit-transition: width 1s, height 1.5s;
+}
+
+.pic:hover{
+width:200px;
+height:350px;
+}
+
+video{
+padding:10px 10px 10px 10px;
+width:320px;
+height:240px;
+border:1px solid black;
+}
+
+#topper{
+	/* background-image: url("../images/header.jpg"); */
+/* background-image: url("../images/gradient-wallpaper-1.jpg"); */
+/* background-repeat: repeat-x; */
+}
+nav ul {
+	text-align: center;
+}
+
+ nav ul li {
+	display: inline-block;
+	padding: 10px;
+	margin-right: 30px;
+	background: #BF8230;
+	width:150px;
+	transform: skewX(-40deg);
+	transition: width: 1.5s;
+}
+
+nav ul li:hover{
+	transform: skewX(-20deg);
+	width: 200px;
+}
+
+nav ul li a{
+	text-decoration: none;
+	color: #FFC373;
+} 
+
+/* nav{
+background: lightblue;
+background: -webkit-linear-gradient(lightblue, blue);
+background: -moz-linear-gradient(lightblue, blue);
+} */
+
+.sized {
+	width: 150px;
+	height: 150px;
+	background: #BF8230;
+	margin: 10px;
+}
+
+.circle {
+	border-radius: 100%;
+}
+.box1 {
+	border-top-right-radius: 50px;
+	border-bottom-left-radius: 50px;
+}
+.box2 {
+	border-radius: 30px;
+}
+.box3 {
+	border-top-left-radius: 30px;
+	border-top-right-radius: 30px;
+	border-bottom-left-radius: 30%;
+}
+
+
+

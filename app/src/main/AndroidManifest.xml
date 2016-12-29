@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.donotforget.user.donotforget">
+
+    <uses-permission android:name="android.permission.READ_SMS" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.WRITE_CONTACTS" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        android:supportsRtl="true"
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ScheduleActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ReminderActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ShowGroupsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".UpdateGroupActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".MessagesActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".AddPreparedMsg"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ShowRemindersActivity"
+            android:screenOrientation="portrait" />
+
+        <receiver android:name=".services.RestartService">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name=".services.AlarmReceiver">
+            <intent-filter>
+                <action android:name="com.donotforget.user.donotforget.services.ALARM" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name=".services.AddContactReceiver">
+            <intent-filter>
+                <action android:name="com.donotforget.user.donotforget.services.ADD_CONTACT" />
+                <action android:name="com.donotforget.user.donotforget.services.NEW_USER" />
+                <action android:name="com.donotforget.user.donotforget.services.PUSH_NOTIFICATION" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name=".services.DeleteContactReceiver">
+            <intent-filter>
+                <action android:name="com.donotforget.user.donotforget.services.DELETE_CONTACT" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name=".services.AddScheduleReceiver">
+            <intent-filter>
+                <action android:name="com.donotforget.user.donotforget.services.ADD_SCHEDULE" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name=".services.DeleteSchedulesReceiver">
+            <intent-filter>
+                <action android:name="com.donotforget.user.donotforget.services.DELETE_SCHEDULES" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name=".services.MarkToDeleteSchedulesReceiver">
+            <intent-filter>
+                <action android:name="com.donotforget.user.donotforget.services.MARK_DELETE_SCHEDULES" />
+            </intent-filter>
+        </receiver>
+
+        <service
+            android:name=".services.AlarmService"
+            android:exported="true" />
+
+        <activity android:name=".NotificationActivity">
+            android:screenOrientation="portrait"
+        </activity>
+        <activity android:name=".SignInActivity" />
+
+        <service
+            android:name=".services.SendToWebService"
+            android:exported="true" />
+
+        <activity android:name=".ShowFailedSchedulesActivity" />
+
+        <!-- Firebase Notifications -->
+        <service android:name=".services.MyFirebaseMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+        <service android:name=".services.FirebaseServerIDService">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+            </intent-filter>
+        </service>
+        <!-- ./Firebase Notifications -->
+        <service
+            android:name=".services.ReadContactsService"
+            android:exported="false"></service>
+    </application>
+
+</manifest>

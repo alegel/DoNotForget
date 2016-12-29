@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FEAC00</color>
+    <color name="bkg">#1DA1F2</color>
+    <color name="inactiv">#514E4d</color>
+    <color name="activ">#FEAC00</color>
+    <color name="day_activ">#FEAC00</color>
+    <color name="bkg2">#3d4935</color>
+    <color name="btn_normal_start">#FEAC00</color>
+</resources>

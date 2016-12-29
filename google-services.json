@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "409301436147",
+    "firebase_url": "https://donotforget-2cfd2.firebaseio.com",
+    "project_id": "donotforget-2cfd2",
+    "storage_bucket": "donotforget-2cfd2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:409301436147:android:e81f019fcd7e6494",
+        "android_client_info": {
+          "package_name": "com.donotforget.user.donotforget"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "409301436147-2j3btl2916d7riqj0g211atf6g5s8qad.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBn8idqYynzvAnxBhMYPlLY0kvItkj44e8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

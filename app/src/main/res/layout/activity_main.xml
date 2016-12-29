@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.donotforget.user.donotforget.MainActivity"
+    android:background="#1DA1F2"
+    android:orientation="vertical"
+    android:paddingStart="@dimen/activity_horizontal_margin"
+    android:textDirection="locale"
+    android:layoutDirection="locale"
+    android:paddingEnd="@dimen/activity_horizontal_margin">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:textDirection="locale"
+        android:layoutDirection="locale"
+        android:layout_weight="2">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="0dp"
+            android:textDirection="locale"
+            android:layoutDirection="locale"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.5">
+
+            <Spinner
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/spinToday"
+                android:textDirection="locale"
+                android:layoutDirection="locale"
+                android:nestedScrollingEnabled="false" />
+            <!--android:spinnerMode="dialog"-->
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="right"
+            android:textDirection="locale"
+            android:layoutDirection="locale"
+            android:gravity="right">
+
+            <Button
+                style="?android:attr/buttonStyleSmall"
+                android:background="@drawable/btn_selector"
+                android:shadowDx="0"
+                android:shadowDy="0"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:text="@string/add_reminder"
+                android:id="@+id/btnAddReminder"
+                android:layout_gravity="bottom|end"
+                android:textSize="12sp"
+                android:textColor="#000000"
+                android:textDirection="locale"
+                android:layoutDirection="locale"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="10"
+        android:textDirection="locale"
+        android:layoutDirection="locale"
+        android:layout_marginTop="10dp">
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/listViewSchedules"
+            android:textDirection="locale"
+            android:layoutDirection="locale"
+            android:layout_gravity="center_horizontal" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:layout_marginTop="10dp"
+        android:textDirection="locale"
+        android:layoutDirection="locale"
+        android:gravity="center_horizontal">
+
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:background="@drawable/btn_selector"
+            android:shadowDx="0"
+            android:shadowDy="0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/messages"
+            android:id="@+id/btnMessages"
+            android:layout_gravity="bottom|start"
+            android:textSize="12sp"
+            android:textColor="#000000"
+            android:textDirection="locale"
+            android:layoutDirection="locale"
+            android:textStyle="bold"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp"
+            android:paddingLeft="2dp"
+            android:paddingEnd="2dp"
+            android:paddingRight="2dp"
+            android:paddingStart="2dp" />
+
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:background="@drawable/btn_selector"
+            android:shadowDx="0"
+            android:shadowDy="0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/groups"
+            android:id="@+id/btnGroups"
+            android:layout_gravity="bottom|end"
+            android:textSize="12sp"
+            android:textColor="#000000"
+            android:textDirection="locale"
+            android:layoutDirection="locale"
+            android:textStyle="bold"
+            android:layout_marginStart="10dp"
+            android:layout_marginRight="10dp"
+            android:paddingEnd="1dp"
+            android:paddingLeft="1dp"
+            android:paddingRight="1dp"
+            android:paddingStart="1dp" />
+
+    </LinearLayout>
+
+</LinearLayout>

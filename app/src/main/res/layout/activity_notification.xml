@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.donotforget.user.donotforget.NotificationActivity"
+    android:orientation="vertical"
+    android:background="#1DA1F2"
+    android:paddingStart="@dimen/activity_horizontal_margin"
+    android:paddingEnd="@dimen/activity_horizontal_margin"
+    android:layoutDirection="locale">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:textDirection="locale"
+        android:layoutDirection="locale">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#FEAC00"
+            android:layoutDirection="locale"
+            android:textDirection="locale"></LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:textDirection="locale"
+            android:layoutDirection="locale"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:id="@+id/tvMessageFrom"
+                android:textColor="#FFFFFF"
+                android:layoutDirection="locale"
+                android:textDirection="locale" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:minHeight="50dp"
+                android:id="@+id/tvNotifMessage"
+                android:textColor="#000000"
+                android:layoutDirection="locale"
+                android:textDirection="locale"
+                android:gravity="center_vertical|center_horizontal" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:textDirection="locale"
+            android:layoutDirection="locale"
+            android:layout_gravity="bottom"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:gravity="start"
+                android:layoutDirection="locale"
+                android:textDirection="locale">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tvPhone"
+                    android:textSize="12sp"
+                    android:textColor="#FF282727"
+                    android:textDirection="locale"
+                    android:layoutDirection="locale" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tvSpace"
+                    android:layout_marginLeft="10dp"
+                    android:textSize="12sp"
+                    android:textColor="#FF282727"
+                    android:layout_marginStart="10dp"
+                    android:layoutDirection="locale"
+                    android:textDirection="locale" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="end"
+                android:textDirection="locale"
+                android:layoutDirection="locale">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tvNotifTime"
+                    android:layout_marginRight="5dp"
+                    android:textSize="12sp"
+                    android:textColor="#FF282727"
+                    android:layout_marginEnd="5dp"
+                    android:layoutDirection="locale"
+                    android:textDirection="locale" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#FEAC00"
+            android:textDirection="locale"
+            android:layoutDirection="locale"
+            android:layout_gravity="bottom"></LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="6"
+        android:gravity="center_vertical"
+        android:background="#1DA1F2"
+        android:layoutDirection="locale"
+        android:textDirection="locale">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:paddingBottom="1dp"
+            android:textDirection="locale"
+            android:layoutDirection="locale">
+
+            <Button
+                android:layout_width="150dp"
+                android:layout_height="50dp"
+                android:text="@string/btn_snooze"
+                android:id="@+id/btnSnooze"
+                android:background="@drawable/btn_selector_snooze"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                android:layoutDirection="locale"
+                android:textDirection="locale" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:paddingTop="1dp"
+            android:textDirection="locale"
+            android:layoutDirection="locale"
+            android:paddingBottom="1dp">
+
+            <Button
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="70dp"
+                android:layout_height="45dp"
+                android:text="+"
+                android:id="@+id/btnPlusHour"
+                android:background="@drawable/btn_notif_selector"
+                android:textColor="#000000"
+                android:textDirection="locale"
+                android:layoutDirection="locale"
+                android:textStyle="bold" />
+
+            <Button
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="70dp"
+                android:layout_height="45dp"
+                android:text="+"
+                android:id="@+id/btnPlusMin"
+                android:layout_marginLeft="5dp"
+                android:background="@drawable/btn_notif_selector"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                android:textDirection="locale"
+                android:layoutDirection="locale"
+                android:layout_marginStart="5dp" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textDirection="locale"
+            android:layoutDirection="locale"
+            android:gravity="center_vertical|center_horizontal">
+
+            <EditText
+                android:layout_width="70dp"
+                android:layout_height="60dp"
+                android:text="00"
+                android:id="@+id/txtHours"
+                android:gravity="center_vertical|center_horizontal"
+                android:textColor="#000000"
+                android:enabled="false"
+                android:focusable="false"
+                android:textDirection="locale"
+                android:layoutDirection="locale"
+                android:background="@drawable/btn_notif_selector"
+                android:textStyle="bold" />
+
+            <EditText
+                android:layout_width="70dp"
+                android:layout_height="60dp"
+                android:id="@+id/txtMins"
+                android:enabled="false"
+                android:layout_marginLeft="5dp"
+                android:gravity="center_vertical|center_horizontal"
+                android:textColor="#000000"
+                android:text="05"
+                android:background="@drawable/btn_notif_selector"
+                android:textStyle="bold"
+                android:textDirection="locale"
+                android:layoutDirection="locale"
+                android:layout_marginStart="5dp" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:paddingBottom="1dp"
+            android:textDirection="locale"
+            android:layoutDirection="locale"
+            android:layout_marginTop="1dp">
+
+            <Button
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="70dp"
+                android:layout_height="45dp"
+                android:text="-"
+                android:id="@+id/btnMinusHour"
+                android:background="@drawable/btn_notif_selector"
+                android:textColor="#000000"
+                android:textDirection="locale"
+                android:layoutDirection="locale"
+                android:textStyle="bold" />
+
+            <Button
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="70dp"
+                android:layout_height="45dp"
+                android:text="-"
+                android:id="@+id/btnMinusMin"
+                android:layout_marginLeft="5dp"
+                android:background="@drawable/btn_notif_selector"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                android:textDirection="locale"
+                android:layoutDirection="locale"
+                android:layout_marginStart="5dp" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:paddingTop="1dp"
+            android:textDirection="locale"
+            android:layoutDirection="locale"
+            android:paddingBottom="1dp">
+
+            <Button
+                android:layout_width="150dp"
+                android:layout_height="50dp"
+                android:text="@string/btn_done"
+                android:id="@+id/btnClose"
+                android:background="@drawable/btn_selector_close"
+                android:textColor="#000000"
+                android:textDirection="locale"
+                android:layoutDirection="locale"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

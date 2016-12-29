@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#1DA1F2"
+    android:textDirection="locale"
+    android:layoutDirection="locale"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="#1DA1F2"
+        android:layout_weight="1"
+        android:textDirection="locale"
+        android:layoutDirection="locale"
+        android:weightSum="1">
+
+        <CheckBox
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/cbPlayRingtone"
+            android:hint="@string/cbPlayRingtone"
+            android:background="#1DA1F2"
+            android:textColor="#FFFFFF"
+            android:checked="false"
+            android:textDirection="locale"
+            android:layoutDirection="locale"
+            android:visibility="gone" />
+
+        <TextView
+            android:layout_width="318dp"
+            android:layout_height="wrap_content"
+            android:text="@string/choose_notification"
+            android:id="@+id/textView"
+            android:layout_gravity="center_horizontal"
+            android:textColor="#000000"
+            android:layout_marginTop="10dp"
+            android:layout_weight="0.05"
+            android:textDirection="locale"
+            android:layoutDirection="locale"
+            android:gravity="center_vertical|center_horizontal" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:textDirection="locale"
+            android:layoutDirection="locale"
+            android:layout_marginTop="10dp">
+
+            <Button
+                android:text="@string/btn_once"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btnOnce"
+                android:textColor="#FFFFFF"
+                android:textDirection="locale"
+                android:layoutDirection="locale"
+                android:background="@drawable/btn_once_active"
+                android:layout_weight="1"
+                android:paddingEnd="1dp"
+                android:paddingLeft="1dp"
+                android:paddingRight="1dp"
+                android:paddingStart="1dp" />
+
+            <Button
+                android:text="@string/btn_Repeat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btnRepeat"
+                android:textColor="#FFFFFF"
+                android:textDirection="locale"
+                android:layoutDirection="locale"
+                android:background="@drawable/btn_once_inactive"
+                android:layout_weight="1"
+                android:paddingEnd="1dp"
+                android:paddingLeft="1dp"
+                android:paddingRight="1dp"
+                android:paddingStart="1dp" />
+        </LinearLayout>
+
+        <ViewSwitcher
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/viewSwitcher"
+            android:background="#1DA1F2"
+            android:paddingTop="10dp"
+            android:paddingRight="5dp"
+            android:paddingLeft="5dp"
+            android:paddingStart="5dp"
+            android:textDirection="locale"
+            android:layoutDirection="locale"
+            android:paddingEnd="5dp">
+
+            <include layout="@layout/include_one_reminder"
+                android:layout_width="match_parent"
+                android:textDirection="locale"
+                android:layoutDirection="locale"
+                android:layout_height="match_parent" />
+
+            <include layout="@layout/include_repeat_reminder"
+                android:layout_width="match_parent"
+                android:textDirection="locale"
+                android:layoutDirection="locale"
+                android:layout_height="match_parent" />
+
+        </ViewSwitcher>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#1DA1F2"
+        android:gravity="bottom|end"
+        android:textDirection="locale"
+        android:layoutDirection="locale"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnSave"
+            android:text="@string/save"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:background="@drawable/btn_selector"
+            android:shadowDx="0"
+            android:shadowDy="0"
+            android:layout_marginTop="10dp"
+            android:focusable="true"
+            android:textStyle="bold"
+            android:layout_marginRight="10dp"
+            android:textDirection="locale"
+            android:layoutDirection="locale"
+            android:layout_marginEnd="10dp"
+            android:paddingEnd="1dp"
+            android:paddingLeft="1dp"
+            android:paddingRight="1dp"
+            android:paddingStart="1dp" />
+    </LinearLayout>
+
+</LinearLayout>

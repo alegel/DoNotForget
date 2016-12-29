@@ -1,0 +1,26 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:textDirection="locale"
+    android:layoutDirection="locale"
+    tools:context="com.donotforget.user.donotforget.ContactRemindersFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinContacts"
+        android:textDirection="locale"
+        android:layoutDirection="locale"
+        android:layout_gravity="center_horizontal" />
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/lvContactSchedules"
+        android:textDirection="locale"
+        android:layoutDirection="locale"
+        android:layout_marginTop="30dp" />
+</FrameLayout>

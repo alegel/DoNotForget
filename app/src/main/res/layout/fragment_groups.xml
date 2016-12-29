@@ -1,0 +1,17 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.donotforget.user.donotforget.GroupsFragment"
+    android:orientation="vertical"
+    android:textDirection="locale"
+    android:layoutDirection="locale"
+    android:background="#1DA1F2">
+
+    <ExpandableListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textDirection="locale"
+        android:layoutDirection="locale"
+        android:id="@+id/lvGroups" />
+</LinearLayout>

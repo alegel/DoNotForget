@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".UpdateGroupActivity"
+    android:orientation="vertical"
+    android:background="#1DA1F2"
+    android:textDirection="locale"
+    android:layoutDirection="locale"
+    android:paddingStart="@dimen/activity_horizontal_margin"
+    android:paddingEnd="@dimen/activity_horizontal_margin">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:textDirection="locale"
+        android:layoutDirection="locale"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/eGroupName"
+            android:textDirection="locale"
+            android:layoutDirection="locale"
+            android:layout_marginLeft="2dp"
+            android:layout_marginStart="2dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:textDirection="locale"
+        android:layoutDirection="locale"
+        android:layout_weight="1">
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/lvShowContacts"
+            android:textDirection="locale"
+            android:layoutDirection="locale"
+            android:choiceMode="multipleChoice" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:textDirection="locale"
+        android:layoutDirection="locale"
+        android:gravity="bottom|end">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:text="@string/save"
+            android:textDirection="locale"
+            android:layoutDirection="locale"
+            android:id="@+id/btnSaveContacts"
+            android:background="@drawable/btn_selector"
+            android:layout_marginBottom="5dp"
+            android:textColor="#000000"
+            android:textStyle="bold"
+            android:paddingEnd="1dp"
+            android:paddingLeft="1dp"
+            android:paddingRight="1dp"
+            android:paddingStart="1dp" />
+    </LinearLayout>
+</LinearLayout>
