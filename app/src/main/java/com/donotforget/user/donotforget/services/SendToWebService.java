@@ -321,6 +321,7 @@ public class SendToWebService extends IntentService {
                             flag = false;
                         } else {
                             flag = true;
+                            Log.d(TAG,getResources().getText(R.string.add_db_successfully).toString());
                             showToast(getResources().getText(R.string.add_db_successfully).toString());
                             break;
                         }
