@@ -135,7 +135,9 @@ public class AlarmService extends IntentService {
 
         alarmManager.set(AlarmManager.RTC_WAKEUP,calendar.getTimeInMillis(),pendingIntent);
 
-        if(calendar.get((Calendar.DAY_OF_MONTH)) == 1){
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+        if(day == 1){
             DeleteOldSchedules(cal);
         }
 
