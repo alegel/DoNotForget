@@ -46,7 +46,7 @@
     <string name="date_period_year_err">The notification cannot be performed once a year, please check the dates period!</string>
     <string name="days_err">Please, select the days for notification</string>
     <string name="add_db_err">Failed to send data. Perhaps, there is a problem with Internet connection</string>
-    <string name="add_notification_err">Failed to send notification. Perhaps, there is a problem with Internet connection</string>
+    <string name="add_notification_err">Failed to send notification. Perhaps, there is a problem with Internet connection or contact phone is switched off</string>
     <string name="save_schedule_err">Failed to save schedule</string>
     <string name="group_name_empty">Please enter a group name</string>
     <string name="group_name_exists">This group name is already exists</string>
@@ -127,7 +127,7 @@
     <string name="verify_phone">In order to verify your phone number you are supposed to receive a SMS within several seconds.\nPlease wait...</string>
     <string name="btnSignIn">Save</string>
     <string name="btnCancel">Cancel</string>
-    <string name="failed_schedules">The contacts below didn\'t manage to get the notifications, perhaps, they have refused from this service.</string>
+    <string name="failed_schedules">The contacts below didn\'t manage to get the notifications, perhaps, they have refused from this service or their phone is switched off.</string>
     <string name="reading_contact_groups">Reading contact groups. Please wait...</string>
     <string name="btn_once">One-time</string>
     <string name="btn_Repeat">Repeated</string>

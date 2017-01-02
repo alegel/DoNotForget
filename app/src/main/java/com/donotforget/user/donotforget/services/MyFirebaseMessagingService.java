@@ -134,28 +134,6 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                 }
             }
 /******************************************************************************************/
-/*
-            if (!isAppIsInBackground()) {
-                Log.d(TAG,"In handleDataMessage, " + "app is in foreground, broadcast the push message");
-                // app is in foreground, broadcast the push message
-                Intent pushNotification = new Intent(MyUsefulFuncs.PUSH_NOTIFICATION);
-                pushNotification.putExtra("message", message);
-                LocalBroadcastManager.getInstance(this).sendBroadcast(pushNotification);
-
-            } else {
-                Log.d(TAG,"In handleDataMessage, " + "app is in background");
-                // app is in background, show the notification in notification tray
-                Intent pushNotification = new Intent(MyUsefulFuncs.PUSH_NOTIFICATION);
-                pushNotification.putExtra("message", message);
-                LocalBroadcastManager.getInstance(this).sendBroadcast(pushNotification);
-            }
-
-        } catch (JSONException e) {
-            Log.d(TAG, "Json Exception: " + e.getMessage());
-        } catch (Exception e) {
-            Log.d(TAG, "Exception: " + e.getMessage());
-        }
-*/
     }
 
     private void handleNotification(RemoteMessage remoteMessage) {

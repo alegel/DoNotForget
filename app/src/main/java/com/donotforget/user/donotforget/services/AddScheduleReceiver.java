@@ -113,7 +113,7 @@ public class AddScheduleReceiver extends BroadcastReceiver {
 
             @Override
             protected Void doInBackground(Void... voids) {
-                Log.d(TAG,"AddScheduleReceiver");
+                Log.d(TAG,"In AddScheduleReceiver, strNewPhone = " + strNewPhone);
                 List<NameValuePair> params = new ArrayList<NameValuePair>();
                 params.add(new BasicNameValuePair("phone", strNewPhone));
 

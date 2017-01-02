@@ -54,6 +54,7 @@ public class SendToWebService extends IntentService {
     private ArrayList<ContactSchedule> contactSchedulesList = new ArrayList<>();
     private ArrayList<ContactSchedule> goodContactSchedulesList = new ArrayList<>();
     private ArrayList<ContactSchedule> badContactSchedulesList = new ArrayList<>();
+    private ArrayList<ContactSchedule> ContactSchedulesListToUpdate = new ArrayList<>();
     private ArrayList<Schedule> schedulesList = new ArrayList<>();
     private List<NameValuePair> params;
 
@@ -291,7 +292,7 @@ public class SendToWebService extends IntentService {
         Schedule schedule;
         contactSchedulesList = dbContactSchedule.ReadContactsWeb();
         schedulesList = dbSchedule.ReadContactsScheduleWeb();
-        boolean flag = true;
+        boolean flag = false;
 
 //        showToast("In handleActionSEND_SCHEDULE");
 
@@ -313,46 +314,54 @@ public class SendToWebService extends IntentService {
             if (sendNotifications() == true) {
                 // Verify what there are no ContactSchedules with Status = "New"
                 if(getNumOfNotUpdatedContactSchedules() == true) {
-/******************* Update isSent field in Contact Schedules ****************************/
-                    if (goodContactSchedulesList.size() > 0) { // For saved in WEB contactSchedules isSent should be updated to '1'
-                        dbContactSchedule = new DBContactSchedule(this);
-                        if (dbContactSchedule.updateContactSchedules(goodContactSchedulesList) < goodContactSchedulesList.size()) {
-                            Log.d(TAG, "Some of contactSchedules were NOT Updated: ");
-                            flag = false;
-                        } else {
-                            flag = true;
-                            showToast(getResources().getText(R.string.add_db_successfully).toString());
-                            break;
-                        }
-                    }
+                    flag = true;
+                    break;
                 }
             }
         }
+//************* Update isSent field in Contact Schedules ****************************************/
+        if (ContactSchedulesListToUpdate.size() > 0) { // For saved in WEB contactSchedules isSent should be updated to '1'
+            dbContactSchedule = new DBContactSchedule(this);
+            if (dbContactSchedule.updateContactSchedules(ContactSchedulesListToUpdate) <= 0) {
+                Log.d(TAG, "Some of contactSchedules were NOT Updated: ");
+            }
+        }
 
-        if(flag == false){
+        if(flag == false || goodContactSchedulesList.size() > 0){
+            if(goodContactSchedulesList != null) {
+                for (int i = 0; i < goodContactSchedulesList.size(); i++) {
+                    badContactSchedulesList.add(goodContactSchedulesList.get(i));
+                }
+            }
             showToast(getResources().getText(R.string.add_notification_err).toString());
             handleFailedSchedules();
+        }
+        else{
+            showToast(getResources().getText(R.string.add_db_successfully).toString());
         }
     }
 
     private boolean getNumOfNotUpdatedContactSchedules() {
-        try {
-            Thread.sleep(500);
-        }
-        catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        ArrayList<ContactSchedule> tempCSList = new ArrayList<>();
+        tempCSList.addAll(goodContactSchedulesList);
+
         boolean isUpdated = true;
-        for (int i = 0; i < goodContactSchedulesList.size(); i++) {
+        for (int i = 0; i < tempCSList.size(); i++) {
             params = new ArrayList<NameValuePair>();
-            params.add(new BasicNameValuePair("phone", goodContactSchedulesList.get(i).getPhone()));
+            params.add(new BasicNameValuePair("phone", tempCSList.get(i).getPhone()));
 
             Log.d(TAG, "Params to Verify updated ContactSchedules:\n");
-            Log.d(TAG, "phone = " + goodContactSchedulesList.get(i).getPhone());
+            Log.d(TAG, "phone = " + tempCSList.get(i).getPhone());
 
             if (sendJson(url_getUpdatedContactSchedule, params) == false) {
-                Log.d(TAG, "Remained NOT UPDATED contactSchedules");
+                Log.d(TAG, "The " + tempCSList.get(i).getPhone() + " Was NOT UPDATED");
                 isUpdated = false;
+            }
+            else {
+                Log.d(TAG, "The user " + tempCSList.get(i).getPhone() + " was updated successfully");
+                ContactSchedulesListToUpdate.add(tempCSList.get(i));
+                int index = goodContactSchedulesList.indexOf(tempCSList.get(i));
+                goodContactSchedulesList.remove(index);
             }
         }
         return isUpdated;
@@ -375,6 +384,12 @@ public class SendToWebService extends IntentService {
                     badContactSchedulesList.add(goodContactSchedulesList.get(j));
                     isSent = false;
                 }
+            }
+            try {
+                Thread.sleep(1000);
+            }
+            catch (InterruptedException e) {
+                e.printStackTrace();
             }
         }
         return isSent;

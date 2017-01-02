@@ -74,6 +74,10 @@ if(isset($_POST['name']) || isset($_POST['phone']) || isset($_POST['server_id'])
 		{
 			include 'new_user_notif.php';	
 		}
+		else
+		{
+			include 'update_user_notif.php';
+		}
 		// Successfully inserted
 		$response['success'] = 1;
 		$response['message'] = "User successfully inserted";

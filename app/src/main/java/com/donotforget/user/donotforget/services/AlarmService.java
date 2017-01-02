@@ -5,12 +5,15 @@ import android.app.IntentService;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.donotforget.user.donotforget.DBObjects.DBContactSchedule;
 import com.donotforget.user.donotforget.DBObjects.DBSchedule;
-import com.donotforget.user.donotforget.objects.JSONParser;
 import com.donotforget.user.donotforget.objects.MyUsefulFuncs;
 import com.donotforget.user.donotforget.objects.Schedule;
 
@@ -31,9 +34,12 @@ public class AlarmService extends IntentService {
     private DBSchedule dbSchedule;
     private DBContactSchedule dbContactSchedule;
     private Context context;
+    private SharedPreferences preferences;
+    private String myPhoneNumber;
     private ArrayList<Integer> delSchedulesID = new ArrayList<>();
     private PendingIntent pendingIntent;
     public static final String ACTION_CREATE = "com.donotforget.user.donotforget.services.action.CREATE";
+//    public static final String ACTION_READ_FROM_SERVER = "com.donotforget.user.donotforget.services.action.READ_FROM_SERVER";
     public static final String ACTION_CANCEL = "com.donotforget.user.donotforget.services.action.CANCEL";
 
     private static final String TAG = "Alex_" + AlarmService.class.getSimpleName();
@@ -42,6 +48,15 @@ public class AlarmService extends IntentService {
     public static final String SCHEDULE_ID = "com.donotforget.user.donotforget.services.extra.SCHEDULE_ID";
     public static final String EXTRA_PARAM2 = "com.donotforget.user.donotforget.services.extra.PARAM2";
 
+    public void showToast(String message) {
+        final String msg = message;
+        new Handler(Looper.getMainLooper()).post(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
+            }
+        });
+    }
     public AlarmService() {
         super("AlarmService");
     }
@@ -133,7 +148,7 @@ public class AlarmService extends IntentService {
      * parameters.
      */
     private void handleActionCreate() {
-        //Log.d(TAG,"In AlarmService, before reading Schedules from DataBase");
+   //     Log.d(TAG,"In handleActionCreate, before reading Schedules from DataBase");
         final DBSchedule dbSchedule = new DBSchedule(this);
         ArrayList<Schedule> schedules = new ArrayList<>();
         Schedule schedule;

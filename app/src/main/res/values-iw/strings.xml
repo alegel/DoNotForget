@@ -34,7 +34,7 @@
     <string name="details_saved">פרטיך נשמרו בהצלחה</string>
     <string name="dismiss_notification">לחץ כאן כדי לסגור את ההתראה</string>
     <string name="edit">עֲרוֹך</string>
-    <string name="failed_schedules">אנשי הקשר מתחת לא הצליחו לקבל את ההתראות, אולי הם ביטלו את השירות זה.</string>
+    <string name="failed_schedules">אנשי הקשר מתחת לא הצליחו לקבל את ההתראות, אולי הם ביטלו את השירות זה או הטלפון שלהם כבוי.</string>
     <string name="fromDate">מ</string>
     <string name="save_schedule_err">נכשל ניסיון לשמור את לוח הזמנים</string>
     <string name="fromDateAfterToDate">תאריך סיום צריך להיות אחרי תאריך ההתחלה</string>
@@ -134,5 +134,5 @@
     <string name="reg_failed">הטלפון שלך לא נרשם עקב בעיה בחיבור לאינטרנט.</string>
     <string name="phone_registered">הטלפון שלך נרשם בהצלחה</string>
     <string name="scheduleFrom">מ</string>
-    <string name="add_notification_err">שליחת הודעה נכשלה. אולי, יש בעיה עם חיבור לאינטרנט</string>
+    <string name="add_notification_err">שליחת הודעה נכשלה. אולי, יש בעיה עם חיבור לאינטרנט או הטלפון של איש הקשר כבוי</string>
 </resources>
