@@ -140,9 +140,6 @@ public class AlarmService extends IntentService {
         if(day == 1){
             DeleteOldSchedules(cal);
         }
-
-
-
     }
 
     /**
