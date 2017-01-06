@@ -114,7 +114,6 @@ public class SendToWebService extends IntentService {
         params.add(new BasicNameValuePair("name", MyUsefulFuncs.myName));
         params.add(new BasicNameValuePair("phone", MyUsefulFuncs.myPhoneNumber));
         params.add(new BasicNameValuePair("server_id", MyUsefulFuncs.myReg_ID));
-//        params.add(new BasicNameValuePair("pakage_id", "pakage_id123"));
 
         if(sendJson(url_add_user, params) == true){
             Log.d(TAG, "User added successfully to DataBase ");
@@ -123,6 +122,7 @@ public class SendToWebService extends IntentService {
         }
         else{
             Log.d(TAG, "Failed to add user. errMessage = " + errMessage);
+//            showToast("In SendToWeb, RecID = " + MyUsefulFuncs.myReg_ID + ", registered = " + MyUsefulFuncs.registered + ", errMessage = " + errMessage);
             showToast(getResources().getString(R.string.database_err));
             DeleteDetailsFromSharedPreferences();
         }

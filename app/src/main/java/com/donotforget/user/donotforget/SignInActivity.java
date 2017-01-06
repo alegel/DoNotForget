@@ -206,12 +206,6 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                 serviceIntent.setAction(SendToWebService.ACTION_ADD_USER);
                 this.startService(serviceIntent);
             }
-            else{
-                Toast.makeText(this,getString(R.string.database_err),Toast.LENGTH_LONG).show();
-//                Toast.makeText(this,"myReg_ID = " + MyUsefulFuncs.myReg_ID + ", registered = " + MyUsefulFuncs.registered ,Toast.LENGTH_LONG).show();
-                DeleteDetailsFromSharedPreferences();
-            }
-
             finish();
         }
         catch (Exception e) {
