@@ -30,7 +30,7 @@ public class FirebaseServerIDService extends FirebaseInstanceIdService {
         FirebaseMessaging.getInstance().subscribeToTopic(MyUsefulFuncs.TOPIC_NEW_USER);
 
         if(!MyUsefulFuncs.myName.equals("") && !MyUsefulFuncs.myPhoneNumber.equals("") && MyUsefulFuncs.registered == 0) {
-            MyUsefulFuncs.registered = 1;
+//            MyUsefulFuncs.registered = 1;
             SendRegistrationToServer();
         }
 

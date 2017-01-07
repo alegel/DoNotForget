@@ -107,9 +107,13 @@ public class SendToWebService extends IntentService {
      */
     private void handleActionAddUser(String param1, String param2) {
         Log.d(TAG,"In SendToWebService->handleActionAddUser");
-        if(MyUsefulFuncs.myName.isEmpty() || MyUsefulFuncs.myPhoneNumber.isEmpty() || MyUsefulFuncs.myReg_ID.isEmpty())
+        if(MyUsefulFuncs.myName.isEmpty() || MyUsefulFuncs.myPhoneNumber.isEmpty() || MyUsefulFuncs.myReg_ID.isEmpty()) {
+            Log.d(TAG, "Failed to add user.The required parameters are empty");
+            showToast(getResources().getString(R.string.database_err));
+            DeleteDetailsFromSharedPreferences();
             return;
-
+        }
+        MyUsefulFuncs.registered = 1;
         List<NameValuePair> params = new ArrayList<NameValuePair>();
         params.add(new BasicNameValuePair("name", MyUsefulFuncs.myName));
         params.add(new BasicNameValuePair("phone", MyUsefulFuncs.myPhoneNumber));
@@ -122,7 +126,6 @@ public class SendToWebService extends IntentService {
         }
         else{
             Log.d(TAG, "Failed to add user. errMessage = " + errMessage);
-//            showToast("In SendToWeb, RecID = " + MyUsefulFuncs.myReg_ID + ", registered = " + MyUsefulFuncs.registered + ", errMessage = " + errMessage);
             showToast(getResources().getString(R.string.database_err));
             DeleteDetailsFromSharedPreferences();
         }
@@ -165,7 +168,7 @@ public class SendToWebService extends IntentService {
 
                 } else {
                     errMessage = json.getString("message");
-//                    Log.d(TAG,"sendJson error message: " + errMessage);
+                    Log.d(TAG,"sendJson error message: " + errMessage);
                     return false;
                 }
             } catch (JSONException e) {

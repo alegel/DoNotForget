@@ -67,26 +67,36 @@ if(isset($_POST['name']) || isset($_POST['phone']) || isset($_POST['server_id'])
 	echo "The insert Command is:<br> ".$str_Insert." ".$str_Values."<br>";
 	
 	// Mysql inserting new row
-	$result = mysqli_query($db, $str_Insert." ".$str_Values);
-	// Check if row inserted or not
-	if($result) {
-		if($count <= 0)	// Notify other users only when new contact is added
+	//$result = mysqli_query($db, $str_Insert." ".$str_Values);
+	for($i=0; $i<10; $i++)
+	{
+		$result = insertData($db, $str_Insert, $str_Values);
+	//	echo "In users.php, Insert Data <br>\n";
+		if($result) 
 		{
-			include 'new_user_notif.php';	
+			if($count <= 0)	// Notify other users only when new contact is added
+			{
+				include 'new_user_notif.php';	
+			}
+			else
+			{
+				include 'update_user_notif.php';
+			}
+			// Successfully inserted
+			$response['success'] = 1;
+			$response['message'] = "User successfully inserted";
+	
+			echo utf8_encode(json_encode($response));
+			break;
 		}
-		else
-		{
-			include 'update_user_notif.php';
-		}
-		// Successfully inserted
-		$response['success'] = 1;
-		$response['message'] = "User successfully inserted";
-
-		echo utf8_encode(json_encode($response));
-	} else {
+	}
+	
+	if ($result == 0)
+	{
+		echo "mysql_error: ".mysqli_error($db)."<br>\n";
 		// Failed to Insert
 		$response['success'] = 0;
-		$response['message'] = "DataBase Error: ".mysql_error();
+		$response['message'] = "DataBase Error: ".mysqli_error($db);
 		echo utf8_encode(json_encode($response));
 	}
 	//mysqli_close($db);		// Added due to Hosting problems
@@ -99,6 +109,12 @@ else
 	echo utf8_encode(json_encode($response));
 	mysqli_close($db);		// Added Dew to Hosting problems
 	exit(0);
+}
+
+function insertData($db, $str_Insert, $str_Values)
+{
+	$res = mysqli_query($db, $str_Insert." ".$str_Values);
+	return $res;
 }
 
 ?>

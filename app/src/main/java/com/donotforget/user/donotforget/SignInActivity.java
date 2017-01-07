@@ -180,6 +180,12 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     private void SaveDetails() {
+        String name = editName.getText().toString();
+        int ind = name.indexOf(39);
+        if(ind > -1){
+            char ch = name.charAt(ind);
+            name = name.replaceAll(String.valueOf(ch),"");
+        }
         Log.d(TAG,"Save New User details");
         try {
             preferences = getSharedPreferences("userDetails", MODE_PRIVATE);
@@ -190,21 +196,40 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         }
         try {
             editor = preferences.edit()
-                    .putString(MyUsefulFuncs.USER_NAME,editName.getText().toString())
+                    .putString(MyUsefulFuncs.USER_NAME,name)
                     .putString(MyUsefulFuncs.USER_PHONE,receivedSMS);
-//                    .putString(MyUsefulFuncs.USER_PHONE,editPhone.getText().toString());
             editor.commit();
 
-            MyUsefulFuncs.myName = editName.getText().toString();
+            MyUsefulFuncs.myName = name;
             MyUsefulFuncs.myPhoneNumber = receivedSMS;
-//            MyUsefulFuncs.myPhoneNumber = editPhone.getText().toString();
 
             Toast.makeText(this,getResources().getString(R.string.registration_process),Toast.LENGTH_LONG).show();
+
+/****************** Wait for refreshedToken for maximum 20 seconds ***************************/
+            if(MyUsefulFuncs.myReg_ID.equals("")){
+                Toast.makeText(this,"Privet Bufet !!!", Toast.LENGTH_LONG).show();
+                for (int i = 0; i <20; i++) {
+                    try {
+                        Thread.sleep(1000);
+                    }
+                    catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    if(!MyUsefulFuncs.myReg_ID.equals("")){
+                        break;
+                    }
+                }
+            }
+/*********************************************************************************************/
             if(!MyUsefulFuncs.myReg_ID.equals("") && MyUsefulFuncs.registered == 0) {
-                MyUsefulFuncs.registered = 1;
+//                MyUsefulFuncs.registered = 1;
                 Intent serviceIntent = new Intent(this, SendToWebService.class);
                 serviceIntent.setAction(SendToWebService.ACTION_ADD_USER);
                 this.startService(serviceIntent);
+            }
+            else if(MyUsefulFuncs.myReg_ID.equals("")){
+                Toast.makeText(this,getString(R.string.database_err),Toast.LENGTH_LONG).show();
+                DeleteDetailsFromSharedPreferences();
             }
             finish();
         }
