@@ -7,13 +7,16 @@ android {
         applicationId "com.donotforget.user.donotforget"
         minSdkVersion 16
         targetSdkVersion 22
-        versionName '4'
-        versionCode 4
+        versionName '4.2'
+        versionNameSuffix '4.2'
     }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            versionNameSuffix '4.2'
         }
     }
     productFlavors {

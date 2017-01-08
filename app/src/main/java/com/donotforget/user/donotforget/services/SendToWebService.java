@@ -374,6 +374,14 @@ public class SendToWebService extends IntentService {
         boolean isSent = true;
         if(goodContactSchedulesList != null) {
             for (int j = 0; j < goodContactSchedulesList.size(); j++) {
+                if(j > 0){
+                    try {
+                        Thread.sleep(500);
+                    }
+                    catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
                 params = new ArrayList<NameValuePair>();
                 params.add(new BasicNameValuePair("phone", goodContactSchedulesList.get(j).getPhone()));
 
@@ -389,7 +397,7 @@ public class SendToWebService extends IntentService {
                 }
             }
             try {
-                Thread.sleep(1000);
+                Thread.sleep(3000);
             }
             catch (InterruptedException e) {
                 e.printStackTrace();

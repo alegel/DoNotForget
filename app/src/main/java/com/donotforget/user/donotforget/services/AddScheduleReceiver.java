@@ -179,7 +179,7 @@ public class AddScheduleReceiver extends BroadcastReceiver {
                                 params.add(new BasicNameValuePair("status", "old"));
                                 params.add(new BasicNameValuePair("phone", strNewPhone));
                                 if(sendJson(url_update_schedule_status, params) == true){
-                                    Log.d(TAG,"Schedules status on Web were updated successfully");
+                                    Log.d(TAG,"Schedules status on Web was updated successfully");
                                 }
                                 else{
                                     Log.d(TAG,"Failed to update schedules status on Web with error: " + errMessage);
