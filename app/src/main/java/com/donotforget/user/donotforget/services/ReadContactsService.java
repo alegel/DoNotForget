@@ -154,9 +154,9 @@ public class ReadContactsService extends IntentService {
 
             @Override
             protected ArrayList<MyContacts> doInBackground(Void... voids) {
-                Log.d(TAG,"Before  ReadContacts" + contactsList);
+//                Log.d(TAG,"Before  ReadContacts" + contactsList);
                 contactsList = dbContacts.ReadContacts();
-                Log.d(TAG,"After  ReadContacts" + contactsList);
+//                Log.d(TAG,"After  ReadContacts" + contactsList);
                 return contactsList;
             }
 
@@ -252,7 +252,7 @@ public class ReadContactsService extends IntentService {
         String newPhone = "";
         for (int i = 0; i < usersFromWebList.size(); i++) {
 //            if(usersFromWebList.get(i).equals(phone)) {
-            if(usersFromWebList.get(i).indexOf(phone.substring(1)) >= 0) {
+            if(phone.length() > 6 && usersFromWebList.get(i).indexOf(phone.substring(1)) >= 0) {
                 newPhone = usersFromWebList.get(i);
                 usersFromWebList.remove(i);
                 return newPhone;

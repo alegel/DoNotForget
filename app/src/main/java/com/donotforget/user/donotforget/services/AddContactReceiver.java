@@ -236,7 +236,7 @@ public class AddContactReceiver extends BroadcastReceiver {
                 }
                 if(!phone.isEmpty()) {
 //                    if(strNewPhone.equals(phone)){
-                    if(strNewPhone.indexOf(phone.substring(1)) >= 0){
+                    if(phone.length() > 6 && strNewPhone.indexOf(phone.substring(1)) >= 0){
                         contact = new MyContacts();
                         contact.setName(mContactName);
                         contact.setPhone(strNewPhone);

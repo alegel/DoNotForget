@@ -105,13 +105,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             MyUsefulFuncs.myName = name;
             MyUsefulFuncs.myPhoneNumber = phone;
             MyUsefulFuncs.myReg_ID = reg_id;
-
-//            Toast.makeText(this,MyUsefulFuncs.myName + ": " + MyUsefulFuncs.myPhoneNumber,LENGTH_LONG).show();
         }
    //     Toast.makeText(this,MyUsefulFuncs.myPhoneNumber,LENGTH_LONG).show();
-/****************************************************************
-        Intent intent = new Intent(this,SignInActivity.class);
-        startActivity(intent);
+/************* TEST *** TEST *** TEST ***************************
+
 /****************************************************************/
     }
 
