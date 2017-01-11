@@ -34,7 +34,7 @@
     <string name="details_saved">פרטיך נשמרו בהצלחה</string>
     <string name="dismiss_notification">לחץ כאן כדי לסגור את ההתראה</string>
     <string name="edit">עֲרוֹך</string>
-    <string name="failed_schedules">אנשי הקשר מתחת לא הצליחו לקבל את ההתראות, אולי הם ביטלו את השירות זה או הטלפון שלהם כבוי.</string>
+    <string name="failed_schedules">אנשי הקשר מתחת לא הצליחו לקבל את ההתראות, אולי הם אינם מחוברים לאינטרנט או הטלפון שלהם כבוי.</string>
     <string name="fromDate">מ</string>
     <string name="save_schedule_err">נכשל ניסיון לשמור את לוח הזמנים</string>
     <string name="fromDateAfterToDate">תאריך סיום צריך להיות אחרי תאריך ההתחלה</string>
@@ -71,7 +71,7 @@
     <string name="select_msg_delete_err">אנא בחר את ההודעה שברצונך למחוק</string>
     <string name="select_msg_edit_err">אנא בחר את ההודעה שברצונך לערוך</string>
     <string name="select_msg_err">אנא בחר את ההודעה</string>
-    <string name="send_schedules_err">יש אנשי קשר שלא יקבלו את ההודעה</string>
+    <string name="send_schedules_err">יש אנשי קשר שלא קיבלו את ההודעה</string>
     <string name="set_schedule">קבע לוח זמנים</string>
     <string name="sunday">א</string>
     <string name="monday">ב</string>

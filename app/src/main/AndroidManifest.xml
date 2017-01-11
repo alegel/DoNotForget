@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.donotforget.user.donotforget">
+
     <permission
         android:name="com.donotforget.user.donotforget.permission.C2D_MESSAGE"
         android:protectionLevel="signature" />
 
     <uses-permission android:name="com.donotforget.user.donotforget.permission.C2D_MESSAGE" />
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
-
     <uses-permission android:name="android.permission.READ_SMS" />
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
     <uses-permission android:name="android.permission.SEND_SMS" />
@@ -127,7 +127,14 @@
         <!-- ./Firebase Notifications -->
         <service
             android:name=".services.ReadContactsService"
-            android:exported="false"></service>
+            android:exported="false" />
+
+        <receiver
+            android:name=".services.CheckOldSchedulesReceiver">
+            <intent-filter>
+                <action android:name="com.donotforget.user.donotforget.services.CHECK_OLD_SCHEDULES" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

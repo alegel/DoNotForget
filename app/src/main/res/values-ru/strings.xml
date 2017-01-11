@@ -35,7 +35,7 @@
     <string name="details_missing">Пожалуйста, обратите внимание: Так как ваш номер телефона не был введен, вы сможете настраивать уведомления только для себя!</string>
     <string name="details_saved">Ваши данные были успешно сохранены</string>
     <string name="dismiss_notification">Нажмите здесь, чтобы отклонить уведомление</string>
-    <string name="failed_schedules">Контакты ниже не смогли получить уведомления, возможно, они отказались от этой службы или их телефон выключен.</string>
+    <string name="failed_schedules">Контакты ниже не смогли получить уведомления, возможно, они не подключены к Интернету или их телефон выключен.</string>
     <string name="fromDate">С</string>
     <string name="save_schedule_err">Не удалось сохранить расписание</string>
     <string name="fromDateAfterToDate">Даты были выбраны неправильно. Пожалуйста, исправьте их.</string>
@@ -72,7 +72,7 @@
     <string name="select_msg_delete_err">Пожалуйста, выберите сообщение для удаления</string>
     <string name="select_msg_edit_err">Выберите сообщение для редактирования</string>
     <string name="select_msg_err">Пожалуйста, выберите сообщение</string>
-    <string name="send_schedules_err">Существуют абоненты, которые не смогут получать уведомления</string>
+    <string name="send_schedules_err">Существуют абоненты, которые не смогли получить уведомление</string>
     <string name="set_schedule">Установить расписание</string>
     <string name="time">Время уведомления</string>
     <string name="time_empty">Пожалуйста, укажите время</string>

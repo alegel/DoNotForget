@@ -1,5 +1,6 @@
 package com.donotforget.user.donotforget.services;
 
+import android.app.AlarmManager;
 import android.app.IntentService;
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -29,7 +30,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+
+import static com.donotforget.user.donotforget.objects.MyUsefulFuncs.SplitString;
 
 
 /**
@@ -54,9 +58,13 @@ public class SendToWebService extends IntentService {
     private ArrayList<ContactSchedule> contactSchedulesList = new ArrayList<>();
     private ArrayList<ContactSchedule> goodContactSchedulesList = new ArrayList<>();
     private ArrayList<ContactSchedule> badContactSchedulesList = new ArrayList<>();
+    private ArrayList<ContactSchedule> ContactSchedulesToCheckLater = new ArrayList<>();
     private ArrayList<ContactSchedule> ContactSchedulesListToUpdate = new ArrayList<>();
     private ArrayList<Schedule> schedulesList = new ArrayList<>();
     private List<NameValuePair> params;
+
+    private AlarmManager alarmManager;
+    private PendingIntent pendingIntent;
 
     private JSONParser jsonParser = new JSONParser();
     private String errMessage = "";
@@ -186,7 +194,7 @@ public class SendToWebService extends IntentService {
         return false;
     }
 
-    private void sendContactSchedules(){
+    private boolean sendContactSchedules(){
         for (int j = 0; j <contactSchedulesList.size(); j++) {
             params = new ArrayList<NameValuePair>();
             String strSchedule_ID = String.format("%d_%s",contactSchedulesList.get(j).getSchedule_id(),MyUsefulFuncs.myReg_ID);
@@ -205,10 +213,12 @@ public class SendToWebService extends IntentService {
             }
             else{
                 Log.d(TAG, "Failed to add contactSchedule: " + errMessage);
-//                showToast(getResources().getText(R.string.add_db_err).toString());
-                badContactSchedulesList.add(contactSchedulesList.get(j));
+                showToast(getResources().getText(R.string.add_db_err).toString());
+                return false;
+//                badContactSchedulesList.add(contactSchedulesList.get(j));
             }
         }
+        return true;
     }
     private boolean sendSchedules(){
         Schedule schedule;
@@ -240,7 +250,7 @@ public class SendToWebService extends IntentService {
                 }
                 else{
                     Log.d(TAG, "Failed to add Schedule");
-                    showToast(getResources().getText(R.string.add_db_err).toString());
+//                    showToast(getResources().getText(R.string.add_db_err).toString());
                     return false;
                 }
             }
@@ -249,14 +259,15 @@ public class SendToWebService extends IntentService {
     }
 
     private void handleFailedSchedules(){
-        for (int i = 0; i < badContactSchedulesList.size(); i++) {    // Schedules, which were no saved in Web
-            dbContactSchedule = new DBContactSchedule(this);
-            if(dbContactSchedule.deleteFromDataBase(badContactSchedulesList.get(i).getSchedule_id(), badContactSchedulesList.get(i).getContactName()) == false){
-                Log.d(TAG, "Failed to delete contactSchedule : " + badContactSchedulesList.get(i).toString());
-            }
-        }
+/***********************************************************************************************/
+// Due to GCM known issue some of the contacts will get the notification
+// within next 8 minutes. Seemingly, their phones are currently in the sleep mode
+// and they supposed to wakeup and receive their push notifications within 8 minutes
+        SetContactSchedulesToCheckLater();
+/***********************************************************************************************/
         if(badContactSchedulesList != null && badContactSchedulesList.size() > 0){
 /***************************** CREATE NOTIFICATION *******************************************************/
+// Create Notification for Schedules, which are suppose to happen in less than 10 minutes
             Intent intent = new Intent(getApplicationContext(), ShowFailedSchedulesActivity.class);
             intent.setAction(SendToWebService.ACTION_SEND_SCHEDULE + badContactSchedulesList.get(0).getId());
 
@@ -282,7 +293,80 @@ public class SendToWebService extends IntentService {
             NotificationManager notificationManager = (NotificationManager) getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
             notificationManager.notify((int) badContactSchedulesList.get(0).getId(),notification);
 /***************************** CREATE NOTIFICATION *******************************************************/
+
+            for (int i = 0; i < badContactSchedulesList.size(); i++) {    // Schedules, which were no saved in Web
+                dbContactSchedule = new DBContactSchedule(this);
+                if(dbContactSchedule.deleteFromDataBase(badContactSchedulesList.get(i).getSchedule_id(), badContactSchedulesList.get(i).getContactName()) == false){
+                    Log.d(TAG, "Failed to delete contactSchedule : " + badContactSchedulesList.get(i).toString());
+                }
+            }
+
+            showToast(getResources().getText(R.string.add_notification_err).toString());
+
         }
+    }
+
+    private void SetContactSchedulesToCheckLater() {
+        Log.d(TAG, "In SetContactSchedulesToCheckLater");
+
+        ArrayList<ContactSchedule> NewBadContactSchedulesList = new ArrayList<>();
+        Schedule schedule;
+        if(badContactSchedulesList != null){
+            for (int i = 0; i <badContactSchedulesList.size(); i++) {
+                schedule = new Schedule();
+                schedule = getSchedule(badContactSchedulesList.get(i).getSchedule_id());
+                if(schedule != null){
+                    String [] fromDate = SplitString(schedule.getFromDate(),"/");
+                    String [] atTime = SplitString(schedule.getAtTime(),":");
+//                    Date date = new Date(Integer.parseInt(fromDate[2]),Integer.parseInt(fromDate[1]),Integer.parseInt(fromDate[0]),
+//                            Integer.parseInt(atTime[1]),Integer.parseInt(atTime[0]));
+
+                    Calendar calSchedule = Calendar.getInstance();
+                    calSchedule.set(Integer.parseInt(fromDate[2]),Integer.parseInt(fromDate[1]) - 1,Integer.parseInt(fromDate[0]),
+                            Integer.parseInt(atTime[0]),Integer.parseInt(atTime[1]));
+                    long scheduledTime = calSchedule.getTimeInMillis();
+
+                    Calendar calendar = Calendar.getInstance();
+                    long curTime = calendar.getTimeInMillis();
+
+                    if( (scheduledTime - curTime) > 600000){        // 600000 Milliseconds =  10 minutes
+                        ContactSchedulesToCheckLater.add(badContactSchedulesList.get(i));
+                    }
+                    else{
+                        NewBadContactSchedulesList.add(badContactSchedulesList.get(i));
+                    }
+                }
+            }
+            badContactSchedulesList.clear();
+            if(NewBadContactSchedulesList != null && NewBadContactSchedulesList.size() > 0) {
+// Send "Failed" message for contacts, which are supposed to get their notification within next 8 minutes
+                badContactSchedulesList.addAll(NewBadContactSchedulesList);
+            }
+        }
+        if(ContactSchedulesToCheckLater != null && ContactSchedulesToCheckLater.size() > 0){
+/**************** Call to BroadcastReceiver in order to update the Web *****************************/
+            Intent intent = new Intent(getApplicationContext(), CheckOldSchedulesReceiver.class);
+            intent.setAction(CheckOldSchedulesReceiver.BROADCAST_CHECK_OLD_SCHEDULES);
+            intent.putExtra(MyUsefulFuncs.CONTACT_SCHEDULES, ContactSchedulesToCheckLater);
+
+            pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+            alarmManager = (AlarmManager) getApplicationContext().getSystemService(Context.ALARM_SERVICE);
+            alarmManager.set(AlarmManager.RTC_WAKEUP,System.currentTimeMillis() + 10 * 60000,pendingIntent); // 1 min
+
+            Log.d(TAG," Send Alarm to CheckOldSchedulesReceiver in 10 minutes");
+/***************************************************************************************************/
+        }
+
+    }
+    private Schedule getSchedule(long id){
+        Schedule schedule = new Schedule();
+        for (int i = 0; i <schedulesList.size() ; i++) {
+            if(schedulesList.get(i).getId() == id){
+                schedule = schedulesList.get(i);
+                return schedule;
+            }
+        }
+        return null;
     }
 
     private void handleActionSEND_SCHEDULE(String param1, String param2) {
@@ -296,10 +380,13 @@ public class SendToWebService extends IntentService {
         contactSchedulesList = dbContactSchedule.ReadContactsWeb();
         schedulesList = dbSchedule.ReadContactsScheduleWeb();
         boolean flag = false;
+        int updatedStatuses = 0;
 
 //        showToast("In handleActionSEND_SCHEDULE");
 
-        sendContactSchedules(); // Failed SContactSchedules will be written to the badContactSchedulesList
+        if(sendContactSchedules() == false){
+            return;
+        }
         if(errMessage.equals("Failed to connect")){
             showToast(getResources().getString(R.string.web_connect_err));
             return;
@@ -313,30 +400,32 @@ public class SendToWebService extends IntentService {
         Log.d(TAG,"The number of badContactSchedules is: " + badContactSchedulesList.size());
         Log.d(TAG,"The number of goodContactSchedules is: " + goodContactSchedulesList.size());
 
-        for (int i = 0; i <5; i++) {
-            if (sendNotifications() == true) {
-                // Verify what there are no ContactSchedules with Status = "New"
-                if(getNumOfNotUpdatedContactSchedules() == true) {
-                    flag = true;
-                    break;
-                }
+        if (sendNotifications() == true) {
+            // Verify what there are no ContactSchedules with Status = "New"
+            if(getNumOfNotUpdatedContactSchedules() == true) {
+                flag = true;
             }
         }
 //************* Update isSent field in Contact Schedules ****************************************/
         if (ContactSchedulesListToUpdate.size() > 0) { // For saved in WEB contactSchedules isSent should be updated to '1'
             dbContactSchedule = new DBContactSchedule(this);
-            if (dbContactSchedule.updateContactSchedules(ContactSchedulesListToUpdate) <= 0) {
+            updatedStatuses = dbContactSchedule.updateContactSchedules(ContactSchedulesListToUpdate);
+            if (updatedStatuses <= 0) {
                 Log.d(TAG, "Some of contactSchedules were NOT Updated: ");
             }
         }
 
         if(flag == false || goodContactSchedulesList.size() > 0){
-            if(goodContactSchedulesList != null) {
-                for (int i = 0; i < goodContactSchedulesList.size(); i++) {
-                    badContactSchedulesList.add(goodContactSchedulesList.get(i));
-                }
+            for (int i = 0; i < goodContactSchedulesList.size(); i++) {
+                badContactSchedulesList.add(goodContactSchedulesList.get(i));
             }
-            showToast(getResources().getText(R.string.add_notification_err).toString());
+
+//            showToast(getResources().getText(R.string.add_notification_err).toString());
+            if(updatedStatuses > 0){
+        // If some of the contacts updated the Web server - Show "Successful" message
+        // The rest of contacts will be verified in 10 minutes
+                showToast(getResources().getText(R.string.add_db_successfully).toString());
+            }
             handleFailedSchedules();
         }
         else{
@@ -347,7 +436,12 @@ public class SendToWebService extends IntentService {
     private boolean getNumOfNotUpdatedContactSchedules() {
         ArrayList<ContactSchedule> tempCSList = new ArrayList<>();
         tempCSList.addAll(goodContactSchedulesList);
-
+        try {
+            Thread.sleep(3000);
+        }
+        catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         boolean isUpdated = true;
         for (int i = 0; i < tempCSList.size(); i++) {
             params = new ArrayList<NameValuePair>();
@@ -395,12 +489,6 @@ public class SendToWebService extends IntentService {
                     badContactSchedulesList.add(goodContactSchedulesList.get(j));
                     isSent = false;
                 }
-            }
-            try {
-                Thread.sleep(3000);
-            }
-            catch (InterruptedException e) {
-                e.printStackTrace();
             }
         }
         return isSent;

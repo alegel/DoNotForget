@@ -71,7 +71,7 @@
     <string name="dismiss_notification">Click here to dismiss the notification</string>
     <string name="contacts_list_empty_err">Among your contacts there is nobody, who has already installed this application</string>
     <string name="messages">List of messages</string>
-    <string name="send_schedules_err">There are contacts, that will not receive the notification</string>
+    <string name="send_schedules_err">There are contacts, that have not receive the notification</string>
     <string name="web_connect_err">Your phone was not registered.\nIn order that you will be able to set notifications for other contacts, your smartphone should be connected to the Internet.</string>
     <string name="database_err">Your phone was not registered due to server problem. Please, try to register later...</string>
     <string name="phone_registered">Your phone was registered successfully.</string>
@@ -127,7 +127,7 @@
     <string name="verify_phone">In order to verify your phone number you are supposed to receive a SMS within several seconds.\nPlease wait...</string>
     <string name="btnSignIn">Save</string>
     <string name="btnCancel">Cancel</string>
-    <string name="failed_schedules">The contacts below didn\'t manage to get the notifications, perhaps, they have refused from this service or their phone is switched off.</string>
+    <string name="failed_schedules">The contacts below didn\'t manage to get the notifications, perhaps, they are not connected to the Internet or their phone is switched off.</string>
     <string name="reading_contact_groups">Reading contact groups. Please wait...</string>
     <string name="btn_once">One-time</string>
     <string name="btn_Repeat">Repeated</string>
