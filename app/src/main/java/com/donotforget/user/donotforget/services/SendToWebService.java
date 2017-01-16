@@ -437,7 +437,7 @@ public class SendToWebService extends IntentService {
         ArrayList<ContactSchedule> tempCSList = new ArrayList<>();
         tempCSList.addAll(goodContactSchedulesList);
         try {
-            Thread.sleep(3000);
+            Thread.sleep(10000);
         }
         catch (InterruptedException e) {
             e.printStackTrace();
