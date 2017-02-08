@@ -101,7 +101,7 @@ public class CheckOldSchedulesReceiver extends BroadcastReceiver {
 
         getNumOfNotUpdatedContactSchedules();
 
-        if (ContactSchedulesListToUpdate.size() > 0) { // For saved in WEB contactSchedules isSent should be updated to '1'
+        if (ContactSchedulesListToUpdate.size() > 0) { // For all contactSchedules isSent should be updated to '1'
             dbContactSchedule = new DBContactSchedule(context);
             if (dbContactSchedule.updateContactSchedules(ContactSchedulesListToUpdate) <= 0) {
                 Log.d(TAG, "Some of contactSchedules were NOT Updated: ");
@@ -166,14 +166,20 @@ public class CheckOldSchedulesReceiver extends BroadcastReceiver {
         boolean isUpdated = true;
         for (int i = 0; i < tempCSList.size(); i++) {
             params = new ArrayList<NameValuePair>();
+            String strSchedule_ID = String.format("%d_%s",tempCSList.get(i).getSchedule_id(),MyUsefulFuncs.myReg_ID);
             params.add(new BasicNameValuePair("phone", tempCSList.get(i).getPhone()));
+            params.add(new BasicNameValuePair("schedule_id", strSchedule_ID));
 
             Log.d(TAG, "Params to Verify updated ContactSchedules:\n");
             Log.d(TAG, "phone = " + tempCSList.get(i).getPhone());
+            Log.d(TAG, "schedule_id = " + strSchedule_ID);
 
             if (sendJson(url_getUpdatedContactSchedule, params) == false) {
                 Log.d(TAG, "The " + tempCSList.get(i).getPhone() + " Was NOT UPDATED");
                 isUpdated = false;
+                ContactSchedulesListToUpdate.add(tempCSList.get(i));
+                int index = contactSchedulesList.indexOf(tempCSList.get(i));
+                contactSchedulesList.remove(index);
             }
             else {
                 Log.d(TAG, "The user " + tempCSList.get(i).getPhone() + " was updated successfully");
